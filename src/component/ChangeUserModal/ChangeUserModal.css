@@ -1,0 +1,11 @@
+.change-user-container {
+    width: 400px;
+    height: 600px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 4px 15px 0px grey;
+    border-radius: 20px;
+}
