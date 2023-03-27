@@ -1,21 +1,27 @@
 .modal-container {
     width: 400px;
-    height: 600px;
+    height: 700px;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    box-shadow: 0 4px 15px 0px grey;
+    box-shadow: 0 4px 15px 0 grey;
     border-radius: 20px;
+}
+.close-button-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 88px;
+    left: 31px;
 }
 
 .closeModal {
     width: 20px;
     height: 20px;
-    position: absolute;
-    top: 18%;
-    right: 27%;
     border-radius: 50%;
     background: black;
     color: white;
@@ -74,4 +80,32 @@
 .submit:hover {
     opacity: 0.8;
     cursor: pointer;
+}
+
+.checkbox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-item {
+    width: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.checkbox-item input {
+    width: 30px;
+    margin: 0 10px 0;
+}
+
+.checkbox-item input:hover {
+    cursor: pointer;
+}
+
+.checkbox-item label {
+    margin: 10px 0 0;
 }

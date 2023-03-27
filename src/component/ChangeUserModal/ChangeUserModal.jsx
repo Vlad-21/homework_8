@@ -38,8 +38,10 @@ const ChangeUserModal = ({user, openModal, update}) => {
     return (
         <div className="modal">
             <div className="change-user-container">
+                <div className="close-button-container">
+                    <div onClick={openModal} className="closeModal">X</div>
+                </div>
                 <h1>Change user data</h1>
-                <div onClick={openModal} className="closeModal">X</div>
                 <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name:</label>
                     <input

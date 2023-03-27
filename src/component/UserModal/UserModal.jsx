@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {validateForm} from "../../services/validation";
 import {createUser} from "../../http/userRequest";
 
@@ -10,9 +10,20 @@ const UserModal = ({openModal, update}) => {
         lastName: '',
         number: '',
         email: '',
+        subscribe: ''
     });
+    const [checkValue, setCheckValue] = useState(null);
     const [errors, setErrors] = useState({});
 
+    useEffect(() => {
+        if (!checkValue) {
+            setCheckValue('standard');
+        }
+    },[]);
+
+    const handleSubscribeClick = (event) => {
+        setCheckValue(event.target.value);
+    }
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
@@ -24,6 +35,7 @@ const UserModal = ({openModal, update}) => {
             setErrors(error);
         } else {
             setErrors({});
+            setFormData(formData.subscribe = checkValue);
             createUser(formData).then(() => {
                 update();
                 openModal();
@@ -36,8 +48,10 @@ const UserModal = ({openModal, update}) => {
     return (
         <div className="modal">
             <div className='modal-container'>
+                <div className="close-button-container">
+                    <div onClick={openModal} className="closeModal">X</div>
+                </div>
                 <h1>Create new user</h1>
-                <div onClick={openModal} className="closeModal">X</div>
                 <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name:</label>
                     <input
@@ -79,6 +93,42 @@ const UserModal = ({openModal, update}) => {
                         onChange={handleChange}
                     />
                     {errors.email && <div className="error-message">{errors.email}</div>}
+                    <label htmlFor="email">Pleas select your subscription:</label>
+                    <div className="checkbox">
+                        <div className="checkbox-item">
+                            <label htmlFor="no-subscription">No</label>
+                            <input
+                                value=""
+                                type="radio"
+                                id="no-subscription"
+                                name="subscribe"
+                                checked={checkValue === ''}
+                                onChange={handleSubscribeClick}
+                            />
+                        </div>
+                        <div className="checkbox-item">
+                            <label htmlFor="standard">Standard</label>
+                            <input
+                                value="standard"
+                                type="radio"
+                                id="standard"
+                                name="subscribe"
+                                checked={checkValue === 'standard'}
+                                onChange={handleSubscribeClick}
+                            />
+                        </div>
+                        <div className="checkbox-item">
+                            <label htmlFor="premium">Premium</label>
+                            <input
+                                value="premium"
+                                type="radio"
+                                id="premium"
+                                name="subscribe"
+                                checked={checkValue === 'premium'}
+                                onChange={handleSubscribeClick}
+                            />
+                        </div>
+                    </div>
                     <div className="button-container">
                         <button
                             type="submit"
